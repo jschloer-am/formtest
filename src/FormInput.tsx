@@ -16,6 +16,7 @@ const FormInput: React.FunctionComponent<FormInputProps> = props => {
         value={value}
         onChangeText={onChange}
         keyboardType="numeric"
+        accessibilityLabel={`input ${label}`}
       />
       <Text style={styles.inputLabel}>{label}</Text>
     </View>

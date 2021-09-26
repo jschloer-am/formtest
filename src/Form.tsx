@@ -5,6 +5,7 @@ import {ActionTypes, formReducer, FormState} from './FormReducer';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import FormInput from './FormInput';
 import {saveFormState} from './FormPersist';
+import {Picker} from '@react-native-picker/picker';
 
 interface FormProps {
   initialState: FormState;
