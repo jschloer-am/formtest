@@ -7,6 +7,10 @@ import {FormState} from './FormReducer';
 
 interface FormLoaderProps {}
 
+/**
+ * Component which handles loading the data from local storage. This would be better implemented with suspense, but that
+ * is still experimental
+ */
 const FormLoader: React.FunctionComponent<FormLoaderProps> = () => {
   //
   const [isLoading, setIsLoading] = useState(true);

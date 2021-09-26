@@ -1,4 +1,16 @@
 import convert from 'convert-units';
+// Helper to build out action types
+type ActionMap<M extends {[index: string]: any}> = {
+  [Key in keyof M]: M[Key] extends undefined
+    ? {
+        type: Key;
+      }
+    : {
+        type: Key;
+        payload: M[Key];
+      };
+};
+
 export type FormState = {
   units: 'IMPERIAL' | 'METRIC';
   imperial: {
@@ -12,17 +24,6 @@ export type FormState = {
     height: string;
     weight: string;
   };
-};
-// Helper to build out types
-type ActionMap<M extends {[index: string]: any}> = {
-  [Key in keyof M]: M[Key] extends undefined
-    ? {
-        type: Key;
-      }
-    : {
-        type: Key;
-        payload: M[Key];
-      };
 };
 
 export enum ActionTypes {

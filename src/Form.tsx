@@ -5,18 +5,48 @@ import {ActionTypes, formReducer, FormState} from './FormReducer';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import FormInput from './FormInput';
 import {saveFormState} from './FormPersist';
-import {Picker} from '@react-native-picker/picker';
 
 interface FormProps {
   initialState: FormState;
 }
+/**
+ * The actual form implementation. Includes all of hte form inputs as well as the save button
+ * @param initialState state of the form on startup
+ * @returns
+ */
 const Form: React.FunctionComponent<FormProps> = props => {
   const [state, dispatch] = useReducer(formReducer, props.initialState);
 
   return (
     <View style={styles.formWrapper}>
       <View style={styles.formBody}>
+        <View style={styles.hiddenButton}>
+          {/* This section is a workaround for the fact that unit tests can't interact with native components and the control I chose to use for the units
+		uses a native input control on iOS
+		 */}
+          <Button
+            accessibilityLabel={'MetricTestButton'}
+            title={'MetricTestButton'}
+            onPress={() => {
+              dispatch({
+                type: ActionTypes.ChangeUnits,
+                payload: 'METRIC',
+              });
+            }}
+          />
+          <Button
+            accessibilityLabel={'ImperialTestButton'}
+            title={'ImperialTestButton'}
+            onPress={() => {
+              dispatch({
+                type: ActionTypes.ChangeUnits,
+                payload: 'IMPERIAL',
+              });
+            }}
+          />
+        </View>
         <SegmentedControl
+          testID={'TEST'}
           values={['Imperial', 'Metric']}
           selectedIndex={state.units === 'IMPERIAL' ? 0 : 1}
           onChange={event => {
@@ -111,8 +141,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingTop: 8,
   },
-  formBody: {flex: 1, flexGrow: 1},
+  formBody: {},
   buttonSection: {},
+  hiddenButton: {display: 'none'},
 
   imperialHeightSection: {
     flexDirection: 'row',

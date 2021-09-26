@@ -10,6 +10,7 @@ export const loadFormState = async (): Promise<FormState | null> => {
   }
   return null;
 };
+
 export const saveFormState = async (value: FormState) => {
   try {
     const jsonValue = JSON.stringify(value);

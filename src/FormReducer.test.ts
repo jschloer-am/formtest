@@ -5,6 +5,7 @@ const defaultState: FormState = {
   metric: {height: '0', weight: '0'},
   units: 'IMPERIAL',
 };
+
 describe('reducer tests', () => {
   test('Change Units action recalculates from metric to imperial', () => {
     const state: FormState = {

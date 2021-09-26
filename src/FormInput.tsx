@@ -6,7 +6,13 @@ interface FormInputProps {
   onChange: (newText: string) => void;
   label: string;
 }
-
+/**
+ *  Reusable form input component
+ * @param value
+ * @param onChange change handler
+ * @param label small unit label to be used after input bos
+ * @returns
+ */
 const FormInput: React.FunctionComponent<FormInputProps> = props => {
   const {value, onChange, label} = props;
   return (
